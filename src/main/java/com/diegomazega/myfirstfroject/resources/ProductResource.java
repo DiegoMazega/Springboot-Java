@@ -1,6 +1,5 @@
 package com.diegomazega.myfirstfroject.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class ProductResource {
 	
 	@GetMapping(value = "/{id}") // requisição Get com um route parameter
 	public ResponseEntity<Product>findById(@PathVariable Long id){
-		Product prod = productRepository.findById(id);
+		Product prod = productRepository.findById(id).get();
 		return ResponseEntity.ok().body(prod);
 	}
 }

@@ -4,15 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id // Diz que esse será o ID na tabela do BD
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // diz que ele será auto increment 
 	private Long id;
 	private String name;
 	
-	@JsonIgnore
+	@JsonIgnore //não retorna ele no json de resposta
+	@OneToMany(mappedBy = "category") // cria a relação de um para muitos com as categorias
 	private List<Product> products = new ArrayList<>();
 	
 	public Category() {}
